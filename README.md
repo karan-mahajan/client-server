@@ -41,38 +41,49 @@ sends the command to the server, else it prints an appropriate error message.
 If the file filename is found in its file directory tree rooted at ~, the server must
 return the filename, size(in bytes), date created and file permissions to the
 client and the client prints the received information on its terminal.
- Note: if the file with the same name exists in multiple folders in the
+Note: if the file with the same name exists in multiple folders in the
 directory tree rooted at ~, the server sends information pertaining to
 the first successful search/match of filename
- Else the client prints “File not found”
-o Ex: Client$ getfs sample.txt
+Else the client prints “File not found”
+Ex: Client$ getfs sample.txt
+
 **getfz size1 size2**
-o The server must return to the client temp.tar.gz that contains all the files in
+
+The server must return to the client temp.tar.gz that contains all the files in
 the directory tree rooted at its ~ whose file-size in bytes is >=size1 and <=size2
  size1 < = size2 (size1>= 0 and size2>=0)
 o If none of the files of the specified size are present, the server sends “No file
 found” to the client (which is then printed on the client terminal by the client)
 o Ex: Client$ getfz 1240 12450
+
 **getft <extension list> //up to 3 different file types**
-o the server must return temp.tar.gz that contains all the files in its directory tree
+
+the server must return temp.tar.gz that contains all the files in its directory tree
 rooted at ~ belonging to the file type/s listed in the extension list, else the
 server sends the message “No file found” to the client (which is printed on the
 client terminal by the client)
-o The extension list must have at least one file type and can have up to 3
+The extension list must have at least one file type and can have up to 3
 different file types
-o Ex: Client$ getft c txt
-o Client$ getft jpg bmp pdf
+Ex: Client$ getft c txt
+Client$ getft jpg bmp pdf
+
 **getfdb date**
-o The server must return to the client temp.tar.gz that contains all the files in the
+
+The server must return to the client temp.tar.gz that contains all the files in the
 directory tree rooted at ~ whose date of creation is <=date
-o Ex: Client$ getfdb 2023-01-01
- getfda date
-o The server must return to the client temp.tar.gz that contains all the files in the
+Ex: Client$ getfdb 2023-01-01
+
+**getfda date**
+
+The server must return to the client temp.tar.gz that contains all the files in the
 directory tree rooted at ~ whose date of creation is >=date
-o Ex: Client$ getfda 2023-03-31
-quitc The command is transferred to the server and the client process is terminated
+Ex: Client$ getfda 2023-03-31
+
+
+**quitc** The command is transferred to the server and the client process is terminated
 Note: All files returned from the server must be stored in a folder named f23project in the
 home directory of the client.
+
 Note:
 It is the responsibility of the client process to verify the syntax of the command
 entered by the user (as per the rules in Section 3) before processing it.
@@ -81,10 +92,10 @@ incorrect.
 
 
 Section 3 Alternating Between the Server and the Mirror
- The server and the mirror (the server’s copy possibly with a few
+The server and the mirror (the server’s copy possibly with a few
 additions/changes) are to run on two different machines/terminals.
- The first 4 client connections are to be handled by the server.
- The next 4 client connections are to be handled by the mirror.
- The remaining client connections are to be handled by the server and the
+The first 4 client connections are to be handled by the server.
+The next 4 client connections are to be handled by the mirror.
+The remaining client connections are to be handled by the server and the
 mirror in an alternating manner- (ex: connection 9 is to be handled by the
 server, connection 10 by the mirror, and so on)
